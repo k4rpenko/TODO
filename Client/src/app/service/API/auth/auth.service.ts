@@ -1,0 +1,35 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+    http = inject(HttpClient)
+    constructor() { }
+
+    PostLogin(email: String, password: String) {
+        const json = {
+            "email": email,
+            "password": password
+        };
+
+        return this.http.post<{ token: string }>(`api/Auth/login`, json, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
+        });
+    }
+
+    PostRegister(email: String, password: String, name: String) {
+        const json = {
+            "email": email,
+            "password": password,
+            "name": name
+        };
+
+        return this.http.post<{ token: string }>(`api/Auth/registration`, json, {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
+        });
+    }
+}

@@ -1,0 +1,12 @@
+<Solution>
+  <Project Path="Applications/Applications.csproj" />
+  <Project Path="Core/Core.csproj" />
+  <Project Path="DALPostgresSQL/DALPostgresSQL.csproj" />
+  <Project Path="DALRedis/DALRedis.csproj" Id="4f117cc4-696d-4696-9017-b8af83127cae" />
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+  <Project Path="Hash/Hash.csproj" />
+  <Project Path="Server/Server.csproj" />
+  <Project Path="Test/Test.csproj" />
+</Solution>

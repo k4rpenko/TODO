@@ -1,0 +1,65 @@
+.menu-btn {
+    width: 50px;
+    height: 50px;
+    background-color:var(--object-background-color);
+    border-color: var(--object-background-color);
+}
+
+.dropdown-item{
+    cursor: pointer;
+}
+
+.dropdown-item.active {
+    background-color: #313321;
+    color: white;
+}
+
+.dropdown-item.active svg {
+    fill: currentColor;
+}
+
+.menu {
+    position: absolute;
+    top: 76px;
+    left: 40px;
+    width: 250px;
+
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+
+    opacity: 1;
+    transform: translateY(0);
+
+    transition: opacity .3s ease, transform .3s ease;
+    z-index: 2;
+}
+
+.menu.desactive {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+}
+
+
+.profile_menu {
+    position: absolute;
+    top: 76px;
+    right: -50px;
+
+    width: 250px;
+
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,.15);
+
+    opacity: 1;
+    transform: translateY(0);
+
+    transition: opacity .3s ease, transform .3s ease;
+    z-index: 2;
+}
+
+.profile_menu.desactive {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+}

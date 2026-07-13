@@ -1,0 +1,66 @@
+<div>
+    <app-header />
+    
+    <div class="d-flex flex-column" style="gap: 50px;">
+        <div class="d-flex flex-column d-flex p-3 px-5 mb-3 z-1" style="gap: 20px;">
+            <div>
+                <h2 class="text-opacity-custom">
+                    GoOoOoOoOd DaAYy, {{ userName }}!
+                </h2>
+
+                <h4 class="text-secondary-custom">
+                    Today is: {{ today.getDate() }}.{{ today.getMonth() + 1 }}.{{ today.getFullYear() }}
+                </h4>
+
+                <h1 class="text-primary-custom">
+                    Do a couple of exercises today
+                </h1>
+            </div>
+
+            <div class="search-wrapper">
+                <div class="search-box">
+                    <input
+                        #searchInput
+                        type="text"
+                        class="search-input form-control"
+                        placeholder="Search anything..."
+                        (keydown.enter)="search(searchInput)">
+                    <i class="fas fa-search search-icon"></i>
+
+                    <div class="suggestions">
+                        <div class="recent-searches">History</div>
+                        <div *ngFor='let item of history'>
+                            <div class="suggestion-item">
+                                <i class="fas fa-history"></i>
+                                {{item}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards p-3 px-5 mb-3">
+            <app-card-to-do
+                *ngFor="let item of cards"
+                (delete)="Delete($event)"
+                [card]="item"
+                >
+            </app-card-to-do>
+        </div>
+    </div>
+    <button type="button" class="add-card-button" (click)="openAddCardaPanel()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-plus-fill" viewBox="0 0 16 16">
+            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0"/>
+        </svg>
+    </button>
+
+</div>
+
+@if (showAddCard) {
+    <app-add-chang-card
+        (closed)="closeCard()"
+        (create)="addCard($event)"
+        [type]="Add">
+    </app-add-chang-card>
+}

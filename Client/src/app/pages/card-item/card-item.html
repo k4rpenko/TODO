@@ -1,0 +1,54 @@
+    @if (!isLoading) {
+        <div>
+            <app-header />
+
+            <div class="d-flex px-5 mb-3 justify-content-between" style="width: 100%; height: 70px;">
+                <button class="btn d-flex align-items-center justify-content-center back-btn" type="button" (click)="back()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                        <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="d-flex flex-column p-3 px-5 mb-3" style="gap: 20px;">
+                <h1>{{card.title}}</h1>
+
+                <div class="todo-list-wrapper d-flex flex-column gap-2">
+                    
+                    <div class="todo-item d-flex align-items-center gap-3 py-2" *ngFor="let todo of card.items">
+                        
+                        <div class="circle-checkbox" 
+                            [class.checked]="todo.IsCompleted" 
+                            (click)="IsCompleted(todo.id!)">
+                            <svg *ngIf="todo.IsCompleted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                            </svg>
+                        </div>
+
+                        <div class="d-flex todo-text flex-grow-1" [class.text-decoration-line-through]="todo.IsCompleted">
+                            <input
+                                type="text"
+                                class="form-control form-control-sm border-0 shadow-none edit-input"
+                                [(ngModel)]="todo.title"
+                                (blur)="ChengItem(todo)"
+                                (keyup.enter)="ChengItem(todo)">
+
+                            <button type="button" (click)="deleteItem(todo.id!)" class="btn btn-primar p-1 m-0 d-flex flex-column align-items-center justify-content-center border delete-btn rounded-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-file-earmark-x-fill" viewBox="0 0 16 16">
+                                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M6.854 7.146 8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 1 1 .708-.708"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+        
+                    <div class="add-new-task mt-3 ps-5"> 
+                        <input type="text" 
+                            class="form-control border-0 shadow-none bg-transparent placeholder-muted p-0" 
+                            placeholder="Add a task or press 'space' to activate the Autopilot..."
+                            [(ngModel)]="newTaskText"
+                            (keydown.enter)="addNewTask(); $event.preventDefault()">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
