@@ -32,7 +32,7 @@ namespace Server.Controllers
                 var ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
                 var redisValid = await _redis.isAuthRedisUser(ipAddress);
 
-                //if (!redisValid) return StatusCode(StatusCodes.Status429TooManyRequests, new { error = "Too many requests" });
+                if (!redisValid) return StatusCode(StatusCodes.Status429TooManyRequests, new { error = "Too many requests" });
 
                 var res = await _userService.AddUserToDB(req.Name, req.Password, req.Email);
 
@@ -72,7 +72,7 @@ namespace Server.Controllers
 
                 var redisValid = await _redis.isAuthRedisUser(ipAddress);
 
-                //if (!redisValid) return StatusCode(StatusCodes.Status429TooManyRequests, new { error = "Too many requests" });
+                if (!redisValid) return StatusCode(StatusCodes.Status429TooManyRequests, new { error = "Too many requests" });
 
                 var userId = await _userService.CheckUserInDB(req.Email);
 

@@ -13,7 +13,7 @@
 
         public int Design { get; set; }
 
-        public List<string> Hashtags { get; set; } = new();
+        public List<string>? Hashtags { get; set; } = new();
 
         public List<ToDoItem> Items { get; set; } = new();
     }

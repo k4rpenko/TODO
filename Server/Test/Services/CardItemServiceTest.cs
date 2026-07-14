@@ -43,7 +43,8 @@ namespace Test.Services
         {
             var newCards = new CardRequest
             {
-                Title = "Test"
+                Title = "Test",
+                Collor = "123"
             };
 
             await _cardService.Create(newCards, userId);
@@ -62,7 +63,9 @@ namespace Test.Services
             var newReq = new CardItemRequest
             {
                 CardId = card.Id.ToString(),
-                Title = "Test Item"
+                Title = "Test Item",
+                Collor = "123"
+
             };
 
             var res = await _service.Create(newReq, user.Id.ToString());
@@ -195,7 +198,7 @@ namespace Test.Services
                 CardId = card.Id.ToString()
             };
 
-            var res = await _service.IsActive(activeReq, user.Id.ToString());
+            var res = await _service.IsCompleted(activeReq, user.Id.ToString());
 
             Assert.True(res);
         }
@@ -212,7 +215,7 @@ namespace Test.Services
                 CardId = card.Id.ToString()
             };
 
-            var res = await _service.IsActive(activeReq, user.Id.ToString());
+            var res = await _service.IsCompleted(activeReq, user.Id.ToString());
 
             Assert.False(res);
         }

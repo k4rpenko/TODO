@@ -45,7 +45,8 @@ namespace Test.Services
         {
             var newCards = new CardRequest
             {
-                Title = "Test"
+                Title = "Test",
+                Collor = "123"
             };
 
             await _service.Create(newCards, userId);
@@ -62,7 +63,8 @@ namespace Test.Services
 
             var newCards = new CardRequest
             {
-                Title = "Test"
+                Title = "Test",
+                Collor = "123"
             };
 
             var res = await _service.Create(newCards, user.Id.ToString());
