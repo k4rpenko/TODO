@@ -112,7 +112,7 @@
 
                         <div class="row g-3">
 
-                            @for (item of designs; track item) {
+                            @for (item of visibleDesign; track item) {
 
                                 <div class="col-3">
 
@@ -301,10 +301,30 @@
                                         </div>
 
                                     </div>
-
                                 </div>
 
                             }
+                            <div class="d-flex justify-content-center align-items-center mt-3 gap-3">
+
+                                <button
+                                    class="btn btn-outline-secondary"
+                                    (click)="previousPage()"
+                                    [disabled]="page === 0">
+
+                                    ←
+                                </button>
+
+                                <span>{{ page + 1 }}</span>
+
+                                <button
+                                    class="btn btn-outline-secondary"
+                                    (click)="nextPage()"
+                                    [disabled]="(page + 1) * pageSize >= designs.length">
+
+                                    →
+                                </button>
+
+                            </div>
 
                         </div>
 

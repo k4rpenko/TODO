@@ -20,6 +20,10 @@ export class Home implements OnInit {
   from: number = 0;
   category: string = '';
 
+  page: number = 0;
+  pageSize: number = 5;
+  nextPageBool: boolean = true
+
   history: string[] = [];
 
   
@@ -35,11 +39,29 @@ export class Home implements OnInit {
 
   ngOnInit(): void {
     this.getCards();
-    this.from += 20;
 
     this.history = this.historyService.GetSearchHistory();
   }
 
+  get visibleDesign(){
+    const start = this.page * this.pageSize;
+    return this.cards.slice(start, start + this.pageSize);
+  }
+
+  nextPage(){
+    if((this.page + 1) * this.pageSize < this.cards.length){
+      this.page++;
+    }
+    else{
+      this.getCards();
+    }
+  }
+
+  previousPage() {
+    if (this.page > 0) {
+      this.page--;
+    }
+  }
 
   openAddCardaPanel(): void {
     this.showAddCard = true;
@@ -58,9 +80,15 @@ export class Home implements OnInit {
   getCards() {
     this.Rest.GetCards(this.size, this.from, this.category).subscribe({
       next: (response) => {
+        if (response.cards.length === 0) {
+          this.nextPageBool = false;
+        }
         this.cards = [...this.cards, ...response.cards];
+        this.from += 20;
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        this.nextPageBool = false;
+      }
     });
   }
 

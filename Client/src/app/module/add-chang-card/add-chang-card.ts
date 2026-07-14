@@ -27,6 +27,12 @@ export class AddChangCard implements OnInit{
   Add = Card_Action.Add;
   Change = Card_Action.Change;
 
+  page: number = 0;
+  pageSize: number = 4;
+
+  designs = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+  
+
   NewCard: card = {
     title: '',
     description: '',
@@ -46,8 +52,23 @@ export class AddChangCard implements OnInit{
   tagInput = '';
   hashtags: string[] = [];
   design = 1;
-  designs = Array.from({ length: 20 }, (_, i) => i + 1);
 
+  get visibleDesign(){
+    const start = this.page * this.pageSize;
+    return this.designs.slice(start, start + this.pageSize);
+  }
+
+  nextPage(){
+    if((this.page + 1) * this.pageSize < this.designs.length){
+      this.page++;
+    }
+  }
+
+  previousPage() {
+    if (this.page > 0) {
+      this.page--;
+    }
+  }
 
   addTag() {
       const tag = this.tagInput.trim().replace('#', '');
